@@ -1,0 +1,159 @@
+1. import java.util.Scanner;
+
+public class StringAnalysis {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
+
+        int vowels = 0, consonants = 0, digits = 0, special = 0;
+
+        for (char ch : input.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                ch = Character.toLowerCase(ch);
+                if ("aeiou".indexOf(ch) != -1) vowels++;
+                else consonants++;
+            } else if (Character.isDigit(ch)) {
+                digits++;
+            } else if (!Character.isWhitespace(ch)) {
+                special++;
+            }
+        }
+
+        System.out.println("Vowels: " + vowels);
+        System.out.println("Consonants: " + consonants);
+        System.out.println("Digits: " + digits);
+        System.out.println("Special Characters: " + special);
+    }
+}
+
+
+
+2. import java.util.Scanner;
+
+public class MatrixOperations {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter rows and columns for matrices: ");
+        int rows = sc.nextInt();
+        int cols = sc.nextInt();
+
+        int[][] m1 = new int[rows][cols];
+        int[][] m2 = new int[rows][cols];
+
+        System.out.println("Enter elements of Matrix 1:");
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                m1[i][j] = sc.nextInt();
+
+        System.out.println("Enter elements of Matrix 2:");
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                m2[i][j] = sc.nextInt();
+
+        System.out.println("Addition:");
+        printMatrix(add(m1, m2));
+
+        System.out.println("Subtraction:");
+        printMatrix(subtract(m1, m2));
+
+        System.out.println("Multiplication:");
+        printMatrix(multiply(m1, m2));
+    }
+
+    public static int[][] add(int[][] a, int[][] b) {
+        int[][] result = new int[a.length][a[0].length];
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < a[0].length; j++)
+                result[i][j] = a[i][j] + b[i][j];
+        return result;
+    }
+
+    public static int[][] subtract(int[][] a, int[][] b) {
+        int[][] result = new int[a.length][a[0].length];
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < a[0].length; j++)
+                result[i][j] = a[i][j] - b[i][j];
+        return result;
+    }
+
+    public static int[][] multiply(int[][] a, int[][] b) {
+        int[][] result = new int[a.length][b[0].length];
+        for (int i = 0; i < a.length; i++)
+            for (int j = 0; j < b[0].length; j++)
+                for (int k = 0; k < a[0].length; k++)
+                    result[i][j] += a[i][k] * b[k][j];
+        return result;
+    }
+
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int val : row)
+                System.out.print(val + " ");
+            System.out.println();
+        }
+    }
+}
+
+
+3. import java.util.Scanner;
+
+class BankAccount {
+    private String name;
+    private int accountNumber;
+    private double balance;
+
+    public BankAccount(String name, int accountNumber, double balance) {
+        this.name = name;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public String getName() { return name; }
+    public int getAccountNumber() { return accountNumber; }
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful! Current Balance: " + balance);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Error: Insufficient funds. Current Balance: " + balance);
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful! Current Balance: " + balance);
+        }
+    }
+}
+
+public class BankingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Create Account:");
+        System.out.print("Name: ");
+        String name = sc.nextLine();
+        System.out.print("Account Number: ");
+        int accNo = sc.nextInt();
+        System.out.print("Initial Balance: ");
+        double balance = sc.nextDouble();
+
+        BankAccount account = new BankAccount(name, accNo, balance);
+
+        System.out.print("Deposit: ");
+        double dep = sc.nextDouble();
+        account.deposit(dep);
+
+        System.out.print("Withdraw: ");
+        double wd = sc.nextDouble();
+        account.withdraw(wd);
+    }
+}
+ 
